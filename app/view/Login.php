@@ -15,7 +15,7 @@ require_once __DIR__ . "/../controller/ControllerLogin.php"
     <nav>
         <div class="navContainer">
             <ul class="navUl">
-                <li><a class="first" href="../../index.html">Inici</a></li>
+                <li><a class="first" href="../../index.php">Inici</a></li>
                 <li><a href="">Objectes</a></li>
             </ul>
             <ul class="navUl">

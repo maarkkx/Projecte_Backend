@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once __DIR__ . "/../model/ModelLogin.php";
 
 $message = "";
@@ -13,10 +15,11 @@ if (isset($_POST['signin'])) {
     $name     = htmlspecialchars($_POST['name']    ?? '');
     $surname  = htmlspecialchars($_POST['surname'] ?? '');
     $email    = htmlspecialchars($_POST['email']   ?? '');
-    $password = hash('sha256', htmlspecialchars($_POST['pwd']     ?? ''));
+    $pwdPlain = htmlspecialchars($_POST['pwd']     ?? '');
 
-    if ($user !== '' && $name !== '' && $email !== '' && $password !== '') {
-        $message = crearUsuari($user, $name, $surname, $email, $password);
+    if ($user !== '' && $name !== '' && $email !== '' && $pwdPlain !== '') {
+        $password = hash('sha256', $pwdPlain);
+        $message  = crearUsuari($user, $name, $surname, $email, $password);
     } else {
         $message = "Falten camps per omplir.";
     }
@@ -24,13 +27,24 @@ if (isset($_POST['signin'])) {
 
 
 if (isset($_POST['login'])) {
-    $message = null;
-    $user = htmlspecialchars(($_POST['user'] ?? ''));
-    $password = hash('sha256', htmlspecialchars(($_POST['pwd'] ?? '')));
-    if ($user !== '' && $password !== '') {
-        $message = loginUsuari($user, $password);
+    $user     = htmlspecialchars($_POST['user'] ?? '');
+    $pwdPlain = htmlspecialchars($_POST['pwd']  ?? '');
+
+    if ($user !== '' && $pwdPlain !== '') {
+        $password = hash('sha256', $pwdPlain);
+
+        $row = loginUsuari($user, $password);
+
+        if ($row) {
+            $_SESSION['user'] = $row['user'];
+
+            header("Location: ../../index.php");
+            exit;
+        } else {
+            $message = "Usuari o contrasenya incorrecte";
+        }
     } else {
-        $message = "Has de omplir tots els camps";
+        $message = "Has d'omplir tots els camps.";
     }
 }
 ?>
