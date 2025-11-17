@@ -25,7 +25,26 @@ CREATE TABLE IF NOT EXISTS articles (
 
 INSERT INTO users (user, nombre, apellido, correo, password, admin)
 VALUES 
-('admin01', 'Mark', 'Gras', 'm.gras@sapalomera.cat', 'admin123', '1'),
-('Mason', 'Alvaro', 'Mason', 'a.masedo@sapalomera.cat', 'MasonesSI', '0'),
-('user02', 'Victor', 'Extremo', 'v.extremera@sapalomera.cat', 'VictorHola', '0'),
-('user03', 'Samuel', 'Cañas', 's.cañadas@sapalomera.cat', 'samuBobo', '0');
+('admin01', 'Mark', 'Gras', 'm.gras@sapalomera.cat', 'admin123', '1');
+
+INSERT INTO articles (user, titol, cos) VALUES
+('admin01', 'Poción', 'Restaura 20 PS al Pokémon objetivo. Ideal para los primeros combates.'),
+('admin01', 'Superpoción', 'Cura 50 PS y es más eficiente durante travesías largas o combates duros.'),
+('admin01', 'Hiperpoción', 'Restaura 120 PS. Uso común en gimnasios con Pokémon de nivel alto.'),
+('admin01', 'Restaurar Todo', 'Cura todos los PS y elimina cambios de estado. Uno de los objetos más valiosos.'),
+('admin01', 'Antídoto', 'Cura el estado de envenenamiento. Muy útil en cuevas y bosques.'),
+('admin01', 'Despertar', 'Elimina el estado de sueño inmediatamente.'),
+('admin01', 'Revivir', 'Revive a un Pokémon debilitado con la mitad de sus PS.'),
+('admin01', 'Máximo Revivir', 'Revive a un Pokémon debilitado y restaura todos sus PS.'),
+('admin01', 'Piedra Trueno', 'Objeto evolutivo que permite evolucionar a ciertos Pokémon de tipo Eléctrico.'),
+('admin01', 'Piedra Fuego', 'Objeto evolutivo para Pokémon como Growlithe o Eevee.'),
+('admin01', 'Piedra Agua', 'Evoluciona a varios Pokémon acuáticos, como Poliwhirl o Eevee.'),
+('admin01', 'Piedra Hoja', 'Evoluciona Pokémon de tipo Planta.'),
+('admin01', 'MT 13 – Rayo Hielo', 'Una MT que enseña un ataque de hielo muy potente y que puede congelar al rival.'),
+('admin01', 'MT 26 – Terremoto', 'Ataque físico muy fuerte de tipo Tierra. Una de las MT más populares.'),
+('admin01', 'Caramelo Raro', 'Aumenta el nivel de un Pokémon en 1. Muy valioso para entrenamiento rápido.'),
+('admin01', 'Cuerda Huida', 'Permite escapar inmediatamente de cuevas y mazmorras.'),
+('admin01', 'Repelente', 'Evita encuentros con Pokémon salvajes de nivel inferior al del primero del equipo.'),
+('admin01', 'Bici', 'Permite desplazarse a mayor velocidad por diversas rutas.'),
+('admin01', 'Superball', 'Poké Ball mejorada con mayores probabilidades de captura.'),
+('admin01', 'Ultraball', 'Poké Ball avanzada que ofrece un ratio de captura excelente.');
