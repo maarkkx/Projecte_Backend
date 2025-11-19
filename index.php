@@ -8,7 +8,9 @@ $page = $_GET['page'] ?? 'home';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon Objects</title>
-    <link rel="stylesheet" href="resources/css/style.css"/>
+    <link rel="stylesheet" href="resources/css/generic.css">
+    <!--CSS personalitzat per cada pàgina-->
+    <link rel="stylesheet" href="resources/css/<?= $page ?>.css">
 </head>
 <body>
     <?php

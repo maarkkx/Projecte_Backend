@@ -1,8 +1,4 @@
-<?php
-// Aquí ya tenemos $articles, $perPage, $pageNum, $totalPages
-?>
 <div class="articles-container">
-
     <form method="get" action="index.php" class="articles-filter">
         <label for="per_page">Articles per pàgina:</label>
         <select name="per_page" id="per_page" onchange="this.form.submit()">
@@ -41,10 +37,9 @@
     <div class="pagination">
         <!-- Primera / Anterior -->
         <?php if ($pageNum > 1): ?>
-            <a class="page-btn"
-               href="index.php?page=objectes&num=1&per_page=<?= $perPage ?>">Primera</a>
-            <a class="page-btn"
-               href="index.php?page=objectes&num=<?= $pageNum - 1 ?>&per_page=<?= $perPage ?>">Anterior</a>
+            <a class="page-btn" href="index.php?page=objectes&num=1&per_page=<?= $perPage ?>">Primera</a>
+            
+            <a class="page-btn" href="index.php?page=objectes&num=<?= $pageNum - 1 ?>&per_page=<?= $perPage ?>">Anterior</a>
         <?php else: ?>
             <span class="page-btn disabled">Primera</span>
             <span class="page-btn disabled">Anterior</span>
