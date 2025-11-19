@@ -74,4 +74,42 @@ function countArticles() {
     }
 }
 
+function countArticlesByUser($user) {
+    global $conn;
+
+    try {
+        $sql = "SELECT COUNT(id) AS total 
+                FROM articles
+                WHERE `user` = :user";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':user', $user, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)$result['total'];
+
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return 0;
+    }
+}
+
+function createArticle($user, $titol, $cos) {
+    global $conn;
+    try {
+        $sql = "INSERT INTO articles (user, titol, cos) VALUES (:user, :titol, :cos)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            ":user" => $user,
+            ":titol" => $titol,
+            ":cos" => $cos
+        ]);
+        return "Article creat correctament";
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return "Error al crear article";
+    }
+}
+
 ?>

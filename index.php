@@ -20,8 +20,8 @@ $page = $_GET['page'] ?? 'home';
     <nav class="<?= $navClass ?>">
         <div class="navContainer">
             <ul class="navUl">
-                <li><a class="first" href="index.php">Inici</a></li>
-                <li><a href="index.php?page=objectes">Objectes</a></li>
+                <li><a class="first" href="index.php">Home</a></li>
+                <li><a href="index.php?page=objectes">Objects</a></li>
             </ul>
 
             <ul class="navUl">
@@ -71,7 +71,8 @@ $page = $_GET['page'] ?? 'home';
                 header("Location: index.php?page=login");
                 exit;
             }
-            echo '<main>';
+            require __DIR__ . '/app/controller/ControllerObj.php';
+            echo '<main class="mainObj">';
             require __DIR__ . '/app/view/vistacrud/viewinsertar.php';
             echo '</main>';
             break;
@@ -86,7 +87,7 @@ $page = $_GET['page'] ?? 'home';
         default:
             echo '<main>';
             ?>
-                <a href="index.php?page=crear" class="btn">Crear Objeto</a>
+                <a href="index.php?page=crear" class="btn">Create Object</a>
             <?php
             echo '</main>';
             break;
