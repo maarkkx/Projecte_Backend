@@ -1,6 +1,7 @@
 <?php
 session_start();
-?>  
+$page = $_GET['page'] ?? 'home';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +11,15 @@ session_start();
     <link rel="stylesheet" href="resources/css/style.css"/>
 </head>
 <body>
-    <nav>
+    <?php
+    //Barra navegació a totes les pagines
+    $navClass = ($page === 'objectes') ? 'navObj' : '';
+    ?>
+    <nav class="<?= $navClass ?>">
         <div class="navContainer">
             <ul class="navUl">
                 <li><a class="first" href="index.php">Inici</a></li>
-                <li><a href="app/view/objectes.php">Objectes</a></li>
+                <li><a href="index.php?page=objectes">Objectes</a></li>
             </ul>
 
             <ul class="navUl">
@@ -24,17 +29,66 @@ session_start();
                             <?= htmlspecialchars($_SESSION['user']) ?>
                         </span>
                         <ul class="user-dropdown">
-                            <li><a href="app/view/logout.php">Log Out</a></li>
+                            <li><a href="index.php?page=logout">Log Out</a></li>
                         </ul>
                     </li>
                 <?php else: ?>
-                    <li><a class="last" href="app/view/login.php">Log In</a></li>
+                    <li><a class="last" href="index.php?page=login">Log In</a></li>
                 <?php endif; ?>
             </ul>
         </div>
     </nav>
-    <main>
-        <a href="app/view/vistacrud/viewinsertar.php" class="btn">Crear Objeto</a>
-    </main>
+
+    <?php
+    //enrutador, selecciona el contingut del main segons la pagina
+    switch ($page) {
+
+        case 'objectes':
+            require __DIR__ . '/app/controller/ControllerObj.php';
+            echo '<main class="mainObj">';
+            require __DIR__ . '/app/view/objectes.php';
+            echo '</main>';
+            break;
+
+        case 'login':
+            require __DIR__ . '/app/controller/ControllerLogin.php';
+            echo '<main>';
+            require __DIR__ . '/app/view/Login.php';
+            echo '</main>';
+            break;
+
+        case 'signin':
+            require __DIR__ . '/app/controller/ControllerLogin.php';
+            echo '<main>';
+            require __DIR__ . '/app/view/Signin.php';
+            echo '</main>';
+            break;
+
+        case 'crear':
+            if (!isset($_SESSION['user'])) {
+                header("Location: index.php?page=login");
+                exit;
+            }
+            echo '<main>';
+            require __DIR__ . '/app/view/vistacrud/viewinsertar.php';
+            echo '</main>';
+            break;
+
+        case 'logout':
+            session_unset();
+            session_destroy();
+            header("Location: index.php");
+            exit;
+
+        case 'home':
+        default:
+            echo '<main>';
+            ?>
+                <a href="index.php?page=crear" class="btn">Crear Objeto</a>
+            <?php
+            echo '</main>';
+            break;
+    }
+    ?>
 </body>
 </html>

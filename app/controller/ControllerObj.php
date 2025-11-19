@@ -1,24 +1,29 @@
 <?php
 require_once __DIR__ . '/../model/ModelObj.php';
+
 $allowed = [1, 5, 10, 15, 20];
 
-//agafar pagines del select:
+// Cantidad por página
 $perPage = isset($_GET['per_page']) ? (int)$_GET['per_page'] : 5;
+if (!in_array($perPage, $allowed, true)) {
+    $perPage = 5;
+}
 
-    //Comprovació si la var $perPage esta dins del rang de la array $allowed, en cas de que no canvia el valor a 5 (per evitar que l'usuari canvii el link)
-if (!in_array($perPage, $allowed, true)) $perPage = 5;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    //comprovació de la var $page, si es mes petit que 1 torna a la primera pagina
-if ($page < 1) $page = 1;
+// Número de página (usamos "num" para no chocar con page=objectes/login/etc)
+$pageNum = isset($_GET['num']) ? (int)$_GET['num'] : 1;
+if ($pageNum < 1) {
+    $pageNum = 1;
+}
 
-//Calcular les pagines totals
 $total = countArticles();
 $totalPages = max(1, ceil($total / $perPage));
 
-//Si l'usuari canvia la pagina no pot superar les maximes pagines
-if ($page > $totalPages) $page = $totalPages;
-$offset = ($page - 1) * $perPage;
+if ($pageNum > $totalPages) {
+    $pageNum = $totalPages;
+}
 
+$offset = ($pageNum - 1) * $perPage;
 
+// obtenemos artículos
 $articles = selectArticles($perPage, $offset);
 ?>

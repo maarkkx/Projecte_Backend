@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 require_once __DIR__ . "/../model/ModelLogin.php";
 
 $message = "";
@@ -38,7 +36,7 @@ if (isset($_POST['login'])) {
         if ($row) {
             $_SESSION['user'] = $row['user'];
 
-            header("Location: ../../index.php");
+            header("Location: index.php");
             exit;
         } else {
             $message = "Usuari o contrasenya incorrecte";

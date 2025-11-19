@@ -11,7 +11,7 @@ function selectArticles($limit = null, $offset = null) {
 
         // offset per començar a agafar articles a partir del article X i limit per agafar la quantitat d'articles per pagina
         if ($limit !== null && $offset !== null) {
-            $sql .= " LIMIT :limit OFFSET :offset";
+            $sql .=  " LIMIT :limit OFFSET :offset";
         }
 
         // En cas de no posar els parametres en la funcio els agafa tots els articles
