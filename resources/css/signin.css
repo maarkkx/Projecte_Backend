@@ -43,3 +43,10 @@
     text-align: center;
     margin-bottom: 20px;
 }
+
+.msgErr {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}

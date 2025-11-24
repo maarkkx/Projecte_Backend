@@ -6,11 +6,15 @@
         <input placeholder="Apellido" type="text" name="surname" id="surname" class="inputs" value="<?php echo htmlspecialchars($surname);?>"><br><br>
         <input placeholder="Correo Electrónico" type="email" name="email" id="email" class="inputs" value="<?php echo htmlspecialchars($email);?>"><br><br>
         <input placeholder="Password" type="password" name="pwd" id="pwd" class="inputs"><br><br>
+        <input placeholder="Password Confirmation" type="password" name="pwdConf" id="pwd" class="inputs"><br><br>
 
         <input type="button" id="login" value="Log In" class="login" onclick="window.location.href='index.php?page=login'">
         <button type="submit" name="signin" id="signin" value="Sign in" class="signin">Sign In</button>
         <?php if (!empty($message)): ?>
             <div class="msg"><br><p><?= $message ?></p></div>
+        <?php endif; ?>
+        <?php if (!empty($messageErr)): ?>
+            <div class="msgErr"><br><p><?= $messageErr ?></p></div>
         <?php endif; ?>
     </form>
 </div>
