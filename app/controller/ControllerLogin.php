@@ -8,6 +8,7 @@ $name = "";
 $surname = "";
 $email = "";
 
+//Crear Usuaris
 if (isset($_POST['signin'])) {
     $messageErr = null;
     $message = null;
@@ -18,12 +19,13 @@ if (isset($_POST['signin'])) {
     $pwdPlain = htmlspecialchars($_POST['pwd']     ?? '');
     $pwdConf  = htmlspecialchars($_POST['pwdConf'] ?? '');
 
+    // Ifs para comprobar los campos
     if (!preg_match('/^(?=.*[A-Z])(?=.*\d).{8,}$/u', $pwdPlain)) {
-        $messageErr = "La contrasenya ha de complir els requisits: <br> -8 Caràcters <br> -1 Número <br> -1 Majúscula"; 
+        $messageErr = "The password must meet the following requirements: <br> -8 characters <br> -1 Number <br> -1 Capital Letter"; 
     } else if ($pwdPlain !== $pwdConf) {
-        $messageErr = "Les contrasenyes no coincideixen";
+        $messageErr = "The passwords do not match";
     } else if ($user == '' || $name == '' || $email == '' || $pwdPlain == '') {
-        $messageErr = "Falten camps per omplir.";
+        $messageErr = "Fields missing";
     } else {
         $password = hash('sha256', $pwdPlain);
         $message  = crearUsuari($user, $name, $surname, $email, $password);
@@ -33,11 +35,12 @@ if (isset($_POST['signin'])) {
 
 }
 
-
+//Iniciar sesion
 if (isset($_POST['login'])) {
     $user     = htmlspecialchars($_POST['user'] ?? '');
     $pwdPlain = htmlspecialchars($_POST['pwd']  ?? '');
 
+    //Comprobar los campos
     if ($user !== '' && $pwdPlain !== '') {
         $password = hash('sha256', $pwdPlain);
 
@@ -50,10 +53,10 @@ if (isset($_POST['login'])) {
             header("Location: index.php");
             exit;
         } else {
-            $message = "Usuari o contrasenya incorrecte";
+            $message = "Incorrect user or password";
         }
     } else {
-        $message = "Has d'omplir tots els camps.";
+        $message = "Fields missing";
     }
 }
 ?>

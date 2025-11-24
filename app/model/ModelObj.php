@@ -1,20 +1,21 @@
 <?php
 require_once __DIR__ . '/../../config/db-connection.php';
-
+/**
+ * Funcion para coger objetos
+ * @param limit el maximo de objetos
+ * @param offset a partir de que objeto empieza a cogerlos 
+ */
 function selectArticles($limit = null, $offset = null) {
     global $conn;
     try {
-        // Ojo con `user`, mejor entre backticks porque es palabra reservada en MySQL
-        $sql = "SELECT id, `user`, titol, cos 
+        $sql = "SELECT id, user, titol, cos 
                 FROM articles 
                 ORDER BY id ASC";
-
-        // offset per començar a agafar articles a partir del article X i limit per agafar la quantitat d'articles per pagina
         if ($limit !== null && $offset !== null) {
             $sql .=  " LIMIT :limit OFFSET :offset";
         }
 
-        // En cas de no posar els parametres en la funcio els agafa tots els articles
+        //Si no pones ninguno de los parametros los coge todos
         $stmt = $conn->prepare($sql);
         if ($limit !== null && $offset !== null) {
             $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
@@ -30,6 +31,12 @@ function selectArticles($limit = null, $offset = null) {
     }
 }
 
+/**
+ * Funcion para coger objetos de un usuario en especifico
+ * @param user los objetos que pertenecen al usuario
+ * @param limit el maximo de objetos
+ * @param offset a partir de que objeto empieza a cogerlos 
+ */
 function selectArticlesByUser($user, $limit = null, $offset = null) {
     global $conn;
     try {
@@ -58,6 +65,9 @@ function selectArticlesByUser($user, $limit = null, $offset = null) {
     }
 }
 
+/**
+ * Contar todos los objetos
+ */
 function countArticles() {
     global $conn;
     try {
@@ -74,6 +84,10 @@ function countArticles() {
     }
 }
 
+/**
+ * Contar todos los objetos de un usuario
+ * @param user usuario del que contaremos los objetos
+ */
 function countArticlesByUser($user) {
     global $conn;
 
@@ -95,6 +109,12 @@ function countArticlesByUser($user) {
     }
 }
 
+/**
+ * crear objetos
+ * @param user usuario que los crea
+ * @param titol titulo del objeto
+ * @param cos descripcion del objeto
+ */
 function createArticle($user, $titol, $cos) {
     global $conn;
     try {
@@ -105,13 +125,17 @@ function createArticle($user, $titol, $cos) {
             ":titol" => $titol,
             ":cos" => $cos
         ]);
-        return "Article creat correctament";
+        return "Object created!";
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
-        return "Error al crear article";
+        return "Error creating the object";
     }
 }
 
+/**
+ * Obtener un objeto
+ * @param id id del objeto que queremos
+ */
 function getArticleById($id) {
     global $conn;
     try {
@@ -128,6 +152,13 @@ function getArticleById($id) {
     }
 }
 
+
+/**
+ * Actualizar objetos
+ * @param id id del objeto que queremos modificar
+ * @param titol nuevo titulo
+ * @param cos nueva descripcion 
+ */
 function updateArticle($id, $titol, $cos) {
     global $conn;
     try {
@@ -147,6 +178,10 @@ function updateArticle($id, $titol, $cos) {
     }
 }
 
+/**
+ * eliminar objetos
+ * @param id id del objeto que queremos eliminar
+ */
 function deleteArticle($id) {
     global $conn;
     try {

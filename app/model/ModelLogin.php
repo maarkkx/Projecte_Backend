@@ -1,6 +1,12 @@
 <?php
 require_once __DIR__ . '/../../config/db-connection.php';
-
+/**
+ * @param user nombre usuario
+ * @param nombre nombre
+ * @param apellido apellido
+ * @param correo correo de la cuenta
+ * @param password contraseña
+ */
 function crearUsuari($user, $nombre, $apellido, $correo, $password) {
     global $conn;
     try {
@@ -15,12 +21,16 @@ function crearUsuari($user, $nombre, $apellido, $correo, $password) {
             ":correo"=> $correo,
             ":password"=>$password
         ]);
-        return "Usuari creat correctament";
+        return "User created!";
     } catch (PDOException $e) {
         return "Error: " . $e->getMessage();
     }
 }
 
+/**
+ * @param user nombre usuario
+ * @param password contraseña del usuario
+ */
 function loginUsuari($user, $password) {
     global $conn;
     try {

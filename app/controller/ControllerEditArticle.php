@@ -12,20 +12,19 @@ $id = (int)$_GET['id'];
 // cargar artículo
 $article = getArticleById($id);
 if (!$article) {
-    $error = "Article no trobat.";
+    $error = "Object not found.";
     return;
 }
 
-// comprobar permisos: admin o propietario
+// comprobar permisos
 $isAdmin = isset($_SESSION['admin']) && $_SESSION['admin'] === '1';
 if (!isset($_SESSION['user']) ||
     (!$isAdmin && $_SESSION['user'] !== $article['user'])) {
 
-    $error = "No tens permís per editar aquest article.";
+    $error = "You do not have permission to edit this article.";
     return;
 }
 
-// si viene un POST, actualizar o borrar
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // borrar
@@ -34,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: index.php?page=objectes");
             exit;
         } else {
-            $error = "Error en eliminar l'article.";
+            $error = "Error deleting the object.";
         }
     }
 
@@ -47,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: index.php?page=objectes");
             exit;
         } else {
-            $error = "Error en actualitzar l'article.";
+            $error = "Error updating the object.";
         }
     }
 }

@@ -1,3 +1,4 @@
+<!--Si hay un error no se ve la vista, se ve el error-->
 <?php if (isset($error)): ?>
     <p class="error"><?= htmlspecialchars($error) ?></p>
 <?php endif; ?>
