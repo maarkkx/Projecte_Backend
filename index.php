@@ -91,6 +91,19 @@ $page = $_GET['page'] ?? 'home';
             <?php
             echo '</main>';
             break;
+
+        case 'editar':
+            // només usuaris loguejats
+            if (!isset($_SESSION['user'])) {
+                header("Location: index.php?page=login");
+                exit;
+            }
+
+            require __DIR__ . '/app/controller/ControllerEditArticle.php';
+            echo '<main class="mainObj">';
+            require __DIR__ . '/app/view/vistacrud/vieweditar.php';
+            echo '</main>';
+            break;
     }
     ?>
 </body>

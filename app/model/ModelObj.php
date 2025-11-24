@@ -112,4 +112,52 @@ function createArticle($user, $titol, $cos) {
     }
 }
 
+function getArticleById($id) {
+    global $conn;
+    try {
+        $sql = "SELECT id, `user`, titol, cos
+                FROM articles
+                WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return null;
+    }
+}
+
+function updateArticle($id, $titol, $cos) {
+    global $conn;
+    try {
+        $sql = "UPDATE articles
+                SET titol = :titol, cos = :cos
+                WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            ':titol' => $titol,
+            ':cos'   => $cos,
+            ':id'    => (int)$id
+        ]);
+        return true;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+
+function deleteArticle($id) {
+    global $conn;
+    try {
+        $sql = "DELETE FROM articles WHERE id = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
 ?>

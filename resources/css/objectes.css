@@ -94,3 +94,8 @@
     cursor: default;
     box-shadow: none;
 }
+
+.edit {
+    height: 5vh;
+    width: auto;
+}

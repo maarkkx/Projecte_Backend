@@ -20,15 +20,22 @@
     <?php if (!empty($articles)): ?>
         <ul class="articles-list">
             <?php foreach ($articles as $art): ?>
-                <li>
-                    <strong><?= htmlspecialchars($art['titol']) ?></strong><br>
-                    <span class="article-user">
-                        Usuari: <?= htmlspecialchars($art['user']) ?>
-                    </span><br>
-                    <span class="article-body">
-                        <?= htmlspecialchars($art['cos']) ?>
-                    </span>
-                </li>
+            <li>
+                <strong><?= htmlspecialchars($art['titol']) ?></strong><br>
+                <span class="article-user">
+                    Usuari: <?= htmlspecialchars($art['user']) ?>
+                </span><br>
+                <span class="article-body">
+                    <?= htmlspecialchars($art['cos']) ?>
+                </span>
+
+                <?php if (isset($_SESSION['user'])): ?>
+                    <a class="btn-edit"
+                    href="index.php?page=editar&id=<?= $art['id'] ?>">
+                        <img class="edit" src="resources/images/edit.png" alt="Edit Image">
+                    </a>
+                <?php endif; ?>
+            </li>
             <?php endforeach; ?>
         </ul>
     <?php endif; ?>

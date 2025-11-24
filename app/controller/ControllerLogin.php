@@ -35,6 +35,7 @@ if (isset($_POST['login'])) {
 
         if ($row) {
             $_SESSION['user'] = $row['user'];
+            $_SESSION['admin'] = $row['admin'];
 
             header("Location: index.php");
             exit;

@@ -24,8 +24,9 @@ CREATE TABLE IF NOT EXISTS articles (
 );
 
 INSERT INTO users (user, nombre, apellido, correo, password, admin)
-VALUES 
-('admin01', 'Mark', 'Gras', 'm.gras@sapalomera.cat', 'admin123', '1');
+VALUES
+--Contrasenya = "mark"
+('admin01', 'Mark', 'Gras', 'm.gras@sapalomera.cat', '6201eb4dccc956cc4fa3a78dca0c2888177ec52efd48f125df214f046eb43138', '1');
 
 INSERT INTO articles (user, titol, cos) VALUES
 ('admin01', 'Poción', 'Restaura 20 PS al Pokémon objetivo. Ideal para los primeros combates.'),
