@@ -7,8 +7,8 @@
         <input type="submit" class="create" name="create" id="create" value="Create">
         <button class="return" onclick="window.location.href='index.php'">Return</button>
 
-        <?php if (!empty($message)): ?>
-            <div class="msg"><br><p><?= $message ?></p></div>
+        <?php if (!empty($msgObj)): ?>
+            <div class="msg"><br><p><?= $msgObj ?></p></div>
         <?php endif; ?>
     </form>
 </div>

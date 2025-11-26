@@ -195,4 +195,25 @@ function deleteArticle($id) {
         return false;
     }
 }
+
+function selectRandomArticles($limit = 4) {
+    global $conn;
+
+    try {
+        $sql = "SELECT id, titol, cos 
+                FROM articles
+                ORDER BY RAND()
+                LIMIT :limit";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return [];
+    }
+}
 ?>

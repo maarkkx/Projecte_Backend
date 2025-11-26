@@ -41,4 +41,13 @@ if ($isLogged && !$isAdmin) {
     //obtener todos los articulos
     $articles = selectArticles($perPage, $offset);
 }
+
+if (isset($_POST['create'])) {
+    $msgObj = null;
+    $user = $_SESSION['user'];
+    $title = htmlspecialchars($_POST['titol']    ?? '');
+    $cos = htmlspecialchars($_POST['cos']    ?? '');
+
+    $msgObj = createArticle($user, $title, $cos);
+}
 ?>
