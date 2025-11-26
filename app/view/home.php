@@ -1,3 +1,4 @@
+<h1 class="titleIndex">Pokémon Objects</h1>
 <section class="home-articles">
     <?php if (!empty($featuredArticles)): ?>
         <?php foreach ($featuredArticles as $art): ?>

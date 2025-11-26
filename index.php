@@ -44,7 +44,6 @@ $page = $_GET['page'] ?? 'home';
             </div>
         </nav>
     </div>
-    <h1 class="titleIndex">Pokémon Objects</h1>
     <?php
     //enrutador, selecciona el contingut del main segons la pagina
     switch ($page) {
