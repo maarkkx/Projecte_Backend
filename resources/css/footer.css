@@ -1,0 +1,24 @@
+footer {
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(18, 9, 51, 0.452);
+    padding: 10px 36px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+    text-align: center;  
+    justify-content: space-between;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    max-width: 1200px;
+    margin: auto;
+    width: 1200px;
+    font-family: Quicksand, sans-serif;
+}
+
+.titleAutor  {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.titleProj {
+    font-family: 'Quicksand', sans-serif;
+}

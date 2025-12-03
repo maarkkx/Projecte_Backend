@@ -62,6 +62,11 @@
     margin: 0 auto;
     border-radius: 15px;
     max-width: 800px;
+    margin-bottom: 10%;
+}
+
+.navigation {
+    margin-bottom: 10%;
 }
 
 .username, .name, .correo, .password {

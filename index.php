@@ -9,22 +9,27 @@ $page = $_GET['page'] ?? 'home';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon Objects</title>
     <link rel="stylesheet" href="resources/css/generic.css">
+    <link rel="stylesheet" href="resources/css/footer.css">
     <!--CSS personalitzat per cada pàgina-->
     <link rel="stylesheet" href="resources/css/<?= $page ?>.css">
 
     <link href="https://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
     <?php
     //Barra navegació a totes les pagines
     $navClass = ($page === 'objectes') ? 'navObj' : '';
     ?>
-    <div class="probar">
+    <div class="navigation">
         <nav class="<?= $navClass ?>">
             <div class="navContainer">
                 <ul class="navUl">
-                    <li><a class="first" href="index.php">Home</a></li>
-                    <li><a href="index.php?page=objectes">Objects</a></li>
+                    <li><a title="Main Page" class="first" href="index.php">Home</a></li>
+                    <li><a title="Objects Page" href="index.php?page=objectes">Objects</a></li>
                 </ul>
 
                 <ul class="navUl">
@@ -34,11 +39,11 @@ $page = $_GET['page'] ?? 'home';
                                 <?= htmlspecialchars($_SESSION['user']) ?>
                             </span>
                             <ul class="user-dropdown">
-                                <li><a class="logoutA" href="index.php?page=logout">Log Out</a></li>
+                                <li><a title="Log Out" class="logoutA" href="index.php?page=logout">Log Out</a></li>
                             </ul>
                         </li>
                     <?php else: ?>
-                        <li><a class="last" href="index.php?page=login">Log In</a></li>
+                        <li><a title="Log In" class="last" href="index.php?page=login">Log In</a></li>
                     <?php endif; ?>
                 </ul>
             </div>
@@ -108,6 +113,9 @@ $page = $_GET['page'] ?? 'home';
             break;
             }
     ?>
-
+    <footer>
+        <h3 className="titleAutor">Mark Gras</h3>
+        <h3 className="titleProj">Projecte Backend</h3>
+    </footer>
 </body>
 </html>

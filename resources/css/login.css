@@ -8,6 +8,10 @@
     transition: 0.3s;
 }
 
+.navigation {
+    margin-bottom: 10%;
+}
+
 .login:hover {
     background-color: rgb(247, 109, 109);
 }
@@ -57,4 +61,5 @@
     margin: 0 auto;
     border-radius: 15px;
     max-width: 400px;
+    margin-bottom: 15%;
 }

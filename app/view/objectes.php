@@ -28,7 +28,11 @@
                 <span class="article-body">
                     <?= htmlspecialchars($art['cos']) ?>
                 </span>
-
+                <?php
+                    $objName1 = strtolower(str_replace(' ', '-', htmlspecialchars($art['titol'])));
+                    $link1 = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/" . $objName1 . ".png";  
+                ?>
+                <img class="objImg" src="<?php echo $link1?>" alt="<?php echo $objName1?>">
                 <?php if (isset($_SESSION['user'])): ?>
                     <a class="btn-edit"
                     href="index.php?page=editar&id=<?= $art['id'] ?>">
