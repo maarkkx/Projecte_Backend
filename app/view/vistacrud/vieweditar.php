@@ -6,7 +6,7 @@
 <?php if (!empty($article)): ?>
     <div class="editForm">
         <form method="post">
-            <br><br><br><br>
+            <h1>Edit Article</h1><br>
             <label>
                 Title
                 <input type="text" name="titol" value="<?= htmlspecialchars($article['titol']) ?>">

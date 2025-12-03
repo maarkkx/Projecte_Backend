@@ -127,6 +127,7 @@ main {
 .user-menu-name {
     padding: 10px 16px;
     cursor: pointer;
+    font-family: Quicksand, sans-serif;
 }
 
 .user-dropdown {

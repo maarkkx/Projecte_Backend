@@ -5,7 +5,6 @@
             <div class="username">
                 <input placeholder="Usuario" type="text" name="user" id="user" class="inputs" value="<?php echo htmlspecialchars($user);?>"/>
             </div>
-
             <div class="name">
                 <input placeholder="Nombre" type="text" name="name" id="name" class="inputs" value="<?php echo htmlspecialchars($name);?>">
                 <input placeholder="Apellido" type="text" name="surname" id="surname" class="inputs" value="<?php echo htmlspecialchars($surname);?>">

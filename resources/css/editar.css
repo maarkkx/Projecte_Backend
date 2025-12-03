@@ -12,6 +12,18 @@
     color: #333;
 }
 
+.navigation {
+    margin-bottom: 5%;
+}
+
+.h1Create {
+    margin-bottom: 5%;
+}
+.mainObj {
+    margin-bottom: 5%;
+    font-family: Quicksand, sans-serif;
+}
+
 .editForm input[type="text"],
 .editForm textarea {
     width: 100%;

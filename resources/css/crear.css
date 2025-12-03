@@ -4,6 +4,40 @@
     border: 2px solid black;
 }
 
+.navigation {
+    margin-bottom: 5%;
+}
+
+label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    margin-top: 6px;
+    padding: 10px 12px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+    resize: none;
+}
+
+input[type="text"]:focus, textarea:focus {
+    outline: none;
+    background-color: rgb(232, 231, 231);
+}
+
+.h1Create {
+    margin-bottom: 5%;
+}
+.mainObj {
+    margin-bottom: 5%;
+    font-family: Quicksand, sans-serif;
+}
+
 .inputs {
     border-radius: 5px;
     padding: 5px;
