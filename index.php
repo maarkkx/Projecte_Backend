@@ -43,7 +43,7 @@ $page = $_GET['page'] ?? 'home';
                             </ul>
                         </li>
                     <?php else: ?>
-                        <li><a title="Log In" class="last" href="index.php?page=login">Log In</a></li>
+                        <li><a title="Access" class="last" href="index.php?page=login">Log In</a></li>
                     <?php endif; ?>
                 </ul>
             </div>

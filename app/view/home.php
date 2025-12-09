@@ -7,7 +7,6 @@
                 $link = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/" . $objName . ".png";  
             ?>
             <article class="article-card">
-                <?php?>
                 <img class="image" src="<?php echo $link?>" alt="<?php echo $objName?>">
                 <h2><?= htmlspecialchars($art['titol']) ?></h2>
                 <p>
@@ -21,5 +20,5 @@
 </section>
 
 <div class="home-create">
-    <a title="Create Object" href="index.php?page=crear" class="crearObj">Create Object</a>
+    <a title="Create a Object" href="index.php?page=crear" class="crearObj">Create Object</a>
 </div>

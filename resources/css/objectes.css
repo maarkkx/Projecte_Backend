@@ -89,8 +89,8 @@
 }
 
 .page-btn.current-page {
-    background-color: rgb(252, 49, 49);
-    border-color: rgb(252, 49, 49);
+    background-color: #c70000;
+    border-color: #c70000;
     color: white;
     font-weight: bold;
 }

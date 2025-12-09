@@ -1,34 +1,114 @@
-.login {
-    border: none;
-    background-color: rgb(252, 49, 49);
-    color: white;
-    border-radius: 5px;
-    padding: 10px;
-    width: 12vh;
-    transition: 0.3s;
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #ffffff;
+  padding: 40px;
+  width: 750px;
+  border-radius: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.navigation {
-    margin-bottom: 10%;
+.flex-column > label {
+  font-weight: 600;
+  color: #151717;
 }
 
-.login:hover {
-    background-color: rgb(247, 109, 109);
+.google {
+  background-color: white;
 }
 
-.signin {
-    border-radius: 5px;
-    padding: 10px;
-    width: 12vh;
-    transition: 0.3s;
-    border: none;
-    background-color: rgb(183, 183, 183);
+.google:hover {
+  background-color: white;
 }
 
-.signin:hover {
-    background-color: rgb(214, 213, 213);
+.inputForm {
+  border: 1.5px solid #ecedec;
+  border-radius: 10px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  transition: .2s;
 }
 
+.inputForm:focus-within {
+  border-color: #2d79f3;
+}
+
+.input {
+  border: none;
+  width: 100%;
+  height: 100%;
+  margin-left: 10px;
+  background: none;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.link {
+  color: blue;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.button-submit {
+  margin-top: 10px;
+  background-color: #c70000;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  height: 50px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.3s ease;
+}
+
+.button-submit:hover {
+  background-color: #dd6c6c;
+}
+
+.p {
+  text-align: center;
+  font-size: 14px;
+}
+
+.line {
+  margin-top: 10px;
+}
+
+.btn {
+  margin-top: 10px;
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  border: 1px solid #ededef;
+  cursor: pointer;
+}
+
+.btn:hover {
+  border-color: #2d79f3;
+}
+    
 .msg {
     color: black;
     font-weight: bold;
@@ -36,31 +116,27 @@
     margin-bottom: 20px;
 }
 
-.user, 
-.pwd {
-    border-radius: 5px;
-    padding: 5px;
-    width: 30vh;
+.msgErr {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.pwd:focus, 
-.user:focus{
-    outline: none;
-    background-color: rgb(232, 231, 231);
-    border: 2px solid black;
+.navigation {
+    margin-bottom: 3%;
 }
 
 .mainLogin {
     text-align: center;
     display: flex;
     justify-content: center;
-    padding: 15px;
     background-color: white;
     box-shadow: 0px 2px 2px 2px grey;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     border-radius: 15px;
-    max-width: 400px;
-    margin-bottom: 15%;
+    max-width: 800px;
+    margin-bottom: 5%;
     font-family: Quicksand, sans-serif;
 }
