@@ -12,7 +12,9 @@
         </label>
 
         <input type="submit" class="create" name="create" id="create" value="Create">
-        <button class="return" onclick="window.location.href='index.php'">Return</button>
+        <a href="index.php?page=home">
+            <button class="return" type="button">Return</button>
+        </a>
 
         <?php if (!empty($msgObj)): ?>
             <div class="msg"><br><p><?= $msgObj ?></p></div>

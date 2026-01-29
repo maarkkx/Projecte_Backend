@@ -25,14 +25,11 @@ if (isset($_POST['signin'])) {
     } else if ($pwdPlain !== $pwdConf) {
         $messageErr = "The passwords do not match";
     } else if ($user == '' || $name == '' || $email == '' || $pwdPlain == '') {
-        $messageErr = "Fields missing";
+        $messageErr = "Fields missing"; 
     } else {
         $password = hash('sha256', $pwdPlain);
         $message  = crearUsuari($user, $name, $surname, $email, $password);
     }
-
-
-
 }
 
 //Iniciar sesion
@@ -58,5 +55,29 @@ if (isset($_POST['login'])) {
     } else {
         $message = "Fields missing";
     }
+}
+
+require_once __DIR__ . '/../model/ModelRemember.php';
+
+if (!empty($_POST['remember'])) {
+    remember_create_token($row['user'], 30);
+} else {
+    remember_forget_current_token();
+}
+
+if ($row) {
+    $_SESSION['user'] = $row['user'];
+    $_SESSION['admin'] = $row['admin'];
+
+    require_once __DIR__ . '/../model/ModelRemember.php';
+
+    if (!empty($_POST['remember'])) {
+        remember_create_token($row['user'], 30);
+    } else {
+        remember_forget_current_token();
+    }
+
+    header("Location: index.php");
+    exit;
 }
 ?>

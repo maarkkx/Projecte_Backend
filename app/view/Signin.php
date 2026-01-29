@@ -82,14 +82,6 @@
                    class="input" placeholder="Password Confirmation">
         </div>
 
-        <div class="flex-row">
-            <div>
-                <input type="checkbox" id="remember" name="remember">
-                <label for="remember">Remember me </label>
-            </div>
-            <span class="span">Forgot password?</span>
-        </div>
-
         <button type="submit" name="signin" class="button-submit">Sign In</button>
 
         <p class="p">Already have an account?

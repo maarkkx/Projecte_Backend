@@ -23,7 +23,7 @@ function crearUsuari($user, $nombre, $apellido, $correo, $password) {
         ]);
         return "User created!";
     } catch (PDOException $e) {
-        return "Error: " . $e->getMessage();
+        return "Error, try again";
     }
 }
 

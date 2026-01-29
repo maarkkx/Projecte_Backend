@@ -23,6 +23,27 @@ CREATE TABLE IF NOT EXISTS articles (
         ON DELETE SET NULL
 );
 
+CREATE TABLE IF NOT EXISTS remember_tokens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user VARCHAR(20) NOT NULL,
+    selector CHAR(22) NOT NULL,
+    validator_hash CHAR(64) NOT NULL,
+    expires_at DATETIME NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE KEY uq_selector (selector),
+    INDEX idx_user (user),
+    INDEX idx_expires (expires_at),
+
+    FOREIGN KEY (user) REFERENCES users(user)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+ALTER TABLE articles
+  ADD COLUMN created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  ADD INDEX idx_created_at (created_at);
+
 INSERT INTO users (user, nombre, apellido, correo, password, admin)
 VALUES
 --Contrasenya = "mark"

@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once __DIR__ . '/app/model/ModelRemember.php';
+remember_auto_login_if_needed();
 $page = $_GET['page'] ?? 'home';
 ?>
 <!DOCTYPE html>
@@ -31,7 +33,6 @@ $page = $_GET['page'] ?? 'home';
                     <li><a title="Main Page" class="first" href="index.php">Home</a></li>
                     <li><a title="Objects Page" href="index.php?page=objectes">Objects</a></li>
                 </ul>
-
                 <ul class="navUl">
                     <?php if (isset($_SESSION['user'])): ?>
                         <li class="user-menu">
@@ -86,6 +87,9 @@ $page = $_GET['page'] ?? 'home';
             break;
 
         case 'logout':
+            require_once __DIR__ . '/../model/ModelRemember.php';
+            remember_forget_current_token();
+
             session_unset();
             session_destroy();
             header("Location: index.php");

@@ -20,6 +20,9 @@
             <div class="buttons">
                 <button type="submit" class="save" name="save">Save</button>
                 <button type="submit" class="delete" name="delete" onclick="return confirm('Segur que vols eliminar aquest article?');">Delete</button>
+                <a href="index.php?page=objectes">
+                    <button class="return" type="button">Return</button>
+                </a>
             </div>
         </form>
     </div>

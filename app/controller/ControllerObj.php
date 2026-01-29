@@ -1,5 +1,27 @@
 <?php
 require_once __DIR__ . '/../model/ModelObj.php';
+$sortOpt = $_GET['sort'] ?? 'date_desc';
+
+switch ($sortOpt) {
+    case 'title_asc':
+        $sortBy = 'titol';
+        $dir    = 'ASC';
+        break;
+    case 'title_desc':
+        $sortBy = 'titol';
+        $dir    = 'DESC';
+        break;
+    case 'date_asc':
+        $sortBy = 'created_at';
+        $dir    = 'ASC';
+        break;
+    case 'date_desc':
+    default:
+        $sortOpt = 'date_desc';
+        $sortBy  = 'created_at';
+        $dir     = 'DESC';
+        break;
+}
 
 $allowed = [1, 5, 10, 15, 20];
 
@@ -35,11 +57,9 @@ if ($pageNum > $totalPages) {
 $offset = ($pageNum - 1) * $perPage;
 
 if ($isLogged && !$isAdmin) {
-    //obtener todos los articulos del usuario si esta logueado
-    $articles = selectArticlesByUser($_SESSION['user'], $perPage, $offset);
+    $articles = selectArticlesByUser($_SESSION['user'], $perPage, $offset, $sortBy, $dir);
 } else {
-    //obtener todos los articulos
-    $articles = selectArticles($perPage, $offset);
+    $articles = selectArticles($perPage, $offset, $sortBy, $dir);
 }
 
 if (isset($_POST['create'])) {

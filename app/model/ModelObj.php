@@ -5,18 +5,26 @@ require_once __DIR__ . '/../../config/db-connection.php';
  * @param limit el maximo de objetos
  * @param offset a partir de que objeto empieza a cogerlos 
  */
-function selectArticles($limit = null, $offset = null) {
+function selectArticles($limit = null, $offset = null, $sortBy = 'id', $dir = 'ASC') {
     global $conn;
+
     try {
-        $sql = "SELECT id, user, titol, cos 
-                FROM articles 
-                ORDER BY id ASC";
+        $allowedSort = ['id', 'titol', 'created_at'];
+        if (!in_array($sortBy, $allowedSort, true)) {
+            $sortBy = 'id';
+        }
+        $dir = strtoupper($dir) === 'DESC' ? 'DESC' : 'ASC';
+
+        $sql = "SELECT id, user, titol, cos, created_at
+                FROM articles
+                ORDER BY {$sortBy} {$dir}, id ASC";
+
         if ($limit !== null && $offset !== null) {
-            $sql .=  " LIMIT :limit OFFSET :offset";
+            $sql .= " LIMIT :limit OFFSET :offset";
         }
 
-        //Si no pones ninguno de los parametros los coge todos
         $stmt = $conn->prepare($sql);
+
         if ($limit !== null && $offset !== null) {
             $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
             $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
@@ -37,13 +45,21 @@ function selectArticles($limit = null, $offset = null) {
  * @param limit el maximo de objetos
  * @param offset a partir de que objeto empieza a cogerlos 
  */
-function selectArticlesByUser($user, $limit = null, $offset = null) {
+function selectArticlesByUser($user, $limit = null, $offset = null, $sortBy = 'id', $dir = 'ASC') {
     global $conn;
+
     try {
-        $sql = "SELECT id, `user`, titol, cos 
-                FROM articles 
+        // Whitelist para evitar inyección en ORDER BY
+        $allowedSort = ['id', 'titol', 'created_at'];
+        if (!in_array($sortBy, $allowedSort, true)) {
+            $sortBy = 'id';
+        }
+        $dir = strtoupper($dir) === 'DESC' ? 'DESC' : 'ASC';
+
+        $sql = "SELECT id, `user`, titol, cos, created_at
+                FROM articles
                 WHERE `user` = :user
-                ORDER BY id ASC";
+                ORDER BY {$sortBy} {$dir}, id ASC";
 
         if ($limit !== null && $offset !== null) {
             $sql .= " LIMIT :limit OFFSET :offset";
@@ -51,6 +67,7 @@ function selectArticlesByUser($user, $limit = null, $offset = null) {
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':user', $user, PDO::PARAM_STR);
+
         if ($limit !== null && $offset !== null) {
             $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
             $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
@@ -139,7 +156,7 @@ function createArticle($user, $titol, $cos) {
 function getArticleById($id) {
     global $conn;
     try {
-        $sql = "SELECT id, `user`, titol, cos
+        $sql = "SELECT id, `user`, titol, cos, created_at
                 FROM articles
                 WHERE id = :id";
         $stmt = $conn->prepare($sql);

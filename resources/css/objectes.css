@@ -118,3 +118,18 @@ h3 {
     height: 70px;
     width: auto;
 }
+
+.createBtn {
+    padding: 8px;
+    color: white;
+    font-weight: 700;
+    border-radius: 15px;
+    border: none;
+    background-color: rgb(252, 49, 49);
+    transition: 0.3s ease;
+    width: 100%;
+}
+
+.createBtn:hover {
+    background-color: rgb(247, 109, 109);
+}
