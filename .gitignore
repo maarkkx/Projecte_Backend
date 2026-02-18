@@ -1,0 +1,38 @@
+####################################
+# SO / basura
+####################################
+.DS_Store
+Thumbs.db
+
+####################################
+# IDEs / editores
+####################################
+.vscode/
+.idea/
+*.swp
+*.swo
+
+####################################
+# Dependencias
+####################################
+/vendor/
+/node_modules/
+
+####################################
+# Logs / temporales / caché
+####################################
+*.log
+/tmp/
+temp/
+cache/
+.storage/
+.phpunit.result.cache
+coverage/
+
+####################################
+# Entornos / secretos
+####################################
+.env
+.env.*
+config/recaptcha.php
+config/db-connection.php
