@@ -1,9 +1,9 @@
 <?php
 require_once __DIR__ . '/../../config/db-connection.php';
 
-/**
- * Base64 URL-safe (sin =, +, /)
- */
+/*
+*   URL safe
+*/
 function base64url_encode(string $bin): string {
     return rtrim(strtr(base64_encode($bin), '+/', '-_'), '=');
 }
@@ -24,7 +24,7 @@ function remember_set_cookie(string $value, int $expiresTs): void {
 }
 
 /**
- * Borra cookie rememberme
+ * Borrar cookie rememberme
  */
 function remember_clear_cookie(): void {
     setcookie('rememberme', '', [
@@ -66,7 +66,7 @@ function remember_create_token(string $user, int $days = 30): void {
 }
 
 /**
- * Elimina token de BD (por selector) y cookie
+ * Elimina token de BDD
  */
 function remember_forget_current_token(): void {
     global $conn;

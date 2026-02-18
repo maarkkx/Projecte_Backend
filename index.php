@@ -1,5 +1,24 @@
 <?php
 session_start();
+
+// timeout (no rememeber)
+$IDLE_TIMEOUT = 30 * 60; //30 mins
+
+if (isset($_SESSION['user'])) {
+    $now = time();
+
+    if (isset($_SESSION['last_activity']) && ($now - $_SESSION['last_activity']) > $IDLE_TIMEOUT) {
+        session_unset();
+        session_destroy();
+        session_start();
+    } else {
+        $_SESSION['last_activity'] = $now;
+    }
+} else {
+    // aunque no esté logueado, inicializamos para evitar warnings
+    $_SESSION['last_activity'] = time();
+}
+
 require_once __DIR__ . '/app/model/ModelRemember.php';
 remember_auto_login_if_needed();
 $page = $_GET['page'] ?? 'home';
@@ -87,7 +106,7 @@ $page = $_GET['page'] ?? 'home';
             break;
 
         case 'logout':
-            require_once __DIR__ . '/../model/ModelRemember.php';
+            require_once __DIR__ . '/app/model/ModelRemember.php';
             remember_forget_current_token();
 
             session_unset();

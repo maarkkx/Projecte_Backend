@@ -1,3 +1,5 @@
+<?php require_once __DIR__ . '/../../config/recaptcha.php'; ?>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <div class="loginform">
     <form class="form" method="post" action="index.php?page=login">
         <h1>Log In</h1>
@@ -31,7 +33,9 @@
             </div>
             <span class="link">Forgot password?</span>
         </div>
-
+        <?php if (($_SESSION['login_fails'] ?? 0) >= 3): ?>
+            <div class="g-recaptcha" data-sitekey="<?= RECAPTCHA_SITE_KEY ?>"></div>
+        <?php endif; ?>
         <button type="submit" name="login" class="button-submit">Log In</button>
 
         <p class="p">Don't have an account? <input style="border: none; color: blue; background-color: transparent; cursor: pointer;" type="button" value="Sign in"  onclick="window.location.href='index.php?page=signin'"></p>
