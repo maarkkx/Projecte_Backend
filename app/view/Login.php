@@ -4,10 +4,11 @@
     <form class="form" method="post" action="index.php?page=login">
         <h1>Log In</h1>
         <?php if (!empty($message)): ?>
-            <div class="msg"><br><p><?= $message ?></p></div>
+            <div class="msg ok"><p><?= $message ?></p></div>
         <?php endif; ?>
+
         <?php if (!empty($messageErr)): ?>
-            <div class="msgErr"><br><p><?= $messageErr ?></p></div>
+            <div class="msg bad"><p><?= $messageErr ?></p></div>
         <?php endif; ?>
         <!-- USER -->
         <div class="flex-column">

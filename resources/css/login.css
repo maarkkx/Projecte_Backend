@@ -109,18 +109,26 @@
   border-color: #2d79f3;
 }
     
-.msg {
-    color: black;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
+.msg{
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  font-weight: bold;
+  text-align: center;
 }
 
-.msgErr {
-    color: red;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
+.msg p{ margin: 0; }
+
+.msg.ok{
+  background: #e8fff0;
+  border: 1px solid #8ce0a8;
+  color: #1a7f37;
+}
+
+.msg.bad{
+  background: #fff1f1;
+  border: 1px solid #f0a1a1;
+  color: #d1242f;
 }
 
 .navigation {

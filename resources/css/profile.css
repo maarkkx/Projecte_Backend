@@ -1,0 +1,116 @@
+/* resources/css/profile.css */
+
+.navigation {
+    margin-bottom: 5%;
+}
+
+.mainObj {
+    margin-bottom: 5%;
+    font-family: Quicksand, sans-serif;
+}
+
+/* Contenedor estilo "editar" */
+.profileForm {
+    width: 90%;
+    background: #ffffff;
+    margin-top: 0;
+}
+
+/* Labels iguales que editar */
+.profileForm label {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Input igual que editar */
+.profileForm input[type="text"] {
+    width: 100%;
+    margin-top: 6px;
+    padding: 10px 12px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.profileForm input[type="text"]:focus {
+    outline: none;
+    background-color: rgb(232, 231, 231);
+}
+
+.profileMeta {
+    font-family: Quicksand, sans-serif;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+/* Mensajes igual que signin/crear */
+.msg{
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.msg p{ margin: 0; }
+
+.msg.ok{
+  background: #e8fff0;
+  border: 1px solid #8ce0a8;
+  color: #1a7f37;
+}
+
+.msg.bad{
+  background: #fff1f1;
+  border: 1px solid #f0a1a1;
+  color: #d1242f;
+}
+
+/* Botones estilo editar */
+.buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+/* Guardar (gris) */
+.save {
+    background-color: rgb(140, 140, 140);
+    color: white;
+}
+.save:hover {
+    background-color: rgb(208, 208, 208);
+}
+
+/* Volver (rojo) */
+.return {
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: 0.3s;
+    border: none;
+    color: white;
+    background-color: rgb(252, 49, 49);
+}
+.return:hover {
+    background-color: rgb(247, 109, 109);
+}
+
+.hint {
+    color: rgb(127, 127, 127);
+}

@@ -54,6 +54,7 @@ $page = $_GET['page'] ?? 'home';
                 </ul>
                 <ul class="navUl">
                     <?php if (isset($_SESSION['user'])): ?>
+                        <li><a title="Profile" class="" href="index.php?page=profile">Profile</a></li></li></li>
                         <li class="user-menu">
                             <span class="user-menu-name">
                                 <?= htmlspecialchars($_SESSION['user']) ?>
@@ -134,7 +135,21 @@ $page = $_GET['page'] ?? 'home';
             require __DIR__ . '/app/view/vistacrud/vieweditar.php';
             echo '</main>';
             break;
-            }
+
+            case 'profile':
+                if (!isset($_SESSION['user'])) {
+                    header("Location: index.php?page=login");
+                    exit;
+                }
+
+                require __DIR__ . '/app/controller/ControllerProfile.php';
+                echo '<main class="mainObj">';
+                require __DIR__ . '/app/view/editProfile.php';
+                echo '</main>';
+                break;
+    }
+
+
     ?>
     <footer>
         <h3 className="titleAutor">Mark Gras</h3>

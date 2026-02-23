@@ -51,7 +51,7 @@ try {
             $verificar = verificarRecaptcha($token, RECAPTCHA_SECRET_KEY);
 
             if (!$verificar) {
-                $message = "Confirma el reCAPTCHA.";
+                $messageErr = "Confirma el reCAPTCHA.";
                 throw new Exception("Captcha incorrecto");
             }
         }
@@ -85,14 +85,14 @@ try {
                 header("Location: index.php");
                 exit;
             } else {
-                $message = "Incorrect user or password";
+                $messageErr = "Incorrect user or password";
                 $_SESSION['login_fails']++;
             }
         } else {
-            $message = "Fields missing";
+            $messageErr = "Fields missing";
             $_SESSION['login_fails']++;
         }
     }
 } catch (Exception $e) {
-    $message = $message ?? "Error login";
+    if (empty($messageErr)) $messageErr = "Error login";
 }
