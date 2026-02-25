@@ -11,7 +11,6 @@
             <div class="msg bad"><p><?= $messageErr ?></p></div>
         <?php endif; ?>
 
-        <!-- USER -->
         <div class="flex-column">
             <label for="user">User</label>
         </div>
@@ -19,8 +18,6 @@
             <input type="text" id="user" name="user"
                    class="input" placeholder="Enter your User" value="<?php echo htmlspecialchars($user)?>">
         </div>
-
-        <!-- NAME  SURNAME-->
         <div class="flex-row two-cols">
             <div class="col">
                 <div class="flex-column">
@@ -43,7 +40,6 @@
             </div>
         </div>
 
-        <!-- EMAIL-->
         <div class="flex-column">
             <label for="email">Email </label>
         </div>
@@ -57,7 +53,6 @@
                    class="input" placeholder="Enter your Email" value="<?php echo htmlspecialchars($email)?>">
         </div>
 
-        <!-- PASSWORD -->
         <div class="flex-column">
             <label for="password">Password </label>
         </div>
@@ -70,7 +65,6 @@
                    class="input" placeholder="Enter your Password">
         </div>
 
-        <!-- PASSWORD CONFIRMATION -->
         <div class="flex-column">
             <label for="password_confirmation">Password Confirmation</label>
         </div>

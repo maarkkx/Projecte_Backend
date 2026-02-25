@@ -31,6 +31,10 @@ if (isset($_POST['signin'])) {
     } else {
         $password = hash('sha256', $pwdPlain);
         $message  = crearUsuari($user, $name, $surname, $email, $password);
+        if ($message =="Error, try again") {
+            $messageErr = $message;
+            $message = "";
+        }
     }
 }
 

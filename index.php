@@ -54,6 +54,9 @@ $page = $_GET['page'] ?? 'home';
                 </ul>
                 <ul class="navUl">
                     <?php if (isset($_SESSION['user'])): ?>
+                        <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === '1'): ?>
+                            <li><a title="Admin" href="index.php?page=admin">Admin</a></li>
+                        <?php endif; ?>
                         <li><a title="Profile" class="" href="index.php?page=profile">Profile</a></li></li></li>
                         <li class="user-menu">
                             <span class="user-menu-name">
@@ -145,6 +148,20 @@ $page = $_GET['page'] ?? 'home';
                 require __DIR__ . '/app/controller/ControllerProfile.php';
                 echo '<main class="mainObj">';
                 require __DIR__ . '/app/view/editProfile.php';
+                echo '</main>';
+                break;
+
+            case 'admin':
+                //Solo admins
+                if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || $_SESSION['admin'] !== '1') {
+                    header("Location: index.php?page=home");
+                    exit;
+                }
+
+                require __DIR__ . '/app/controller/ControllerAdmin.php';
+
+                echo '<main class="mainObj">';
+                require __DIR__ . '/app/view/admin.php';
                 echo '</main>';
                 break;
     }
