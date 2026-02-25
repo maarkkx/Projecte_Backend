@@ -1,0 +1,22 @@
+# ------------------------------------------------------------
+# Requisitos: mod_rewrite y AllowOverride All (o al menos FileInfo)
+# ------------------------------------------------------------
+Options -Indexes
+
+RewriteEngine On
+
+#Prmitir acceso a index.php
+RewriteRule ^index\.php$ - [L]
+
+#Redireccion si hay error 403
+ErrorDocument 403 /practiques/backend/Projecte/index.php?page=403
+
+# --- Bloquear acceso a cosas ---
+# .git
+RewriteRule ^\.git - [F,L]
+
+# config (db-connection.php, recaptcha.php, .sql, etc.)
+RewriteRule ^config/ - [F,L]
+
+# app (controladores/modelos/vistas)
+RewriteRule ^app/ - [F,L]

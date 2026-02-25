@@ -25,6 +25,7 @@ $page = $_GET['page'] ?? 'home';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,6 +41,7 @@ $page = $_GET['page'] ?? 'home';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <?php
     //Barra navegació a totes les pagines
@@ -57,7 +59,9 @@ $page = $_GET['page'] ?? 'home';
                         <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] === '1'): ?>
                             <li><a title="Admin" href="index.php?page=admin">Admin</a></li>
                         <?php endif; ?>
-                        <li><a title="Profile" class="" href="index.php?page=profile">Profile</a></li></li></li>
+                        <li><a title="Profile" class="" href="index.php?page=profile">Profile</a></li>
+                        </li>
+                        </li>
                         <li class="user-menu">
                             <span class="user-menu-name">
                                 <?= htmlspecialchars($_SESSION['user']) ?>
@@ -119,12 +123,12 @@ $page = $_GET['page'] ?? 'home';
             exit;
 
         case 'home':
-            default:
-                require __DIR__ . '/app/controller/ControllerHome.php';
-                echo '<main class="mainHome">';
-                require __DIR__ . '/app/view/home.php';
-                echo '</main>';
-                break;
+        default:
+            require __DIR__ . '/app/controller/ControllerHome.php';
+            echo '<main class="mainHome">';
+            require __DIR__ . '/app/view/home.php';
+            echo '</main>';
+            break;
 
         case 'editar':
             // només usuaris loguejats
@@ -139,31 +143,36 @@ $page = $_GET['page'] ?? 'home';
             echo '</main>';
             break;
 
-            case 'profile':
-                if (!isset($_SESSION['user'])) {
-                    header("Location: index.php?page=login");
-                    exit;
-                }
+        case 'profile':
+            if (!isset($_SESSION['user'])) {
+                header("Location: index.php?page=login");
+                exit;
+            }
 
-                require __DIR__ . '/app/controller/ControllerProfile.php';
-                echo '<main class="mainObj">';
-                require __DIR__ . '/app/view/editProfile.php';
-                echo '</main>';
-                break;
+            require __DIR__ . '/app/controller/ControllerProfile.php';
+            echo '<main class="mainObj">';
+            require __DIR__ . '/app/view/editProfile.php';
+            echo '</main>';
+            break;
 
-            case 'admin':
-                //Solo admins
-                if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || $_SESSION['admin'] !== '1') {
-                    header("Location: index.php?page=home");
-                    exit;
-                }
+        case 'admin':
+            //Solo admins
+            if (!isset($_SESSION['user']) || !isset($_SESSION['admin']) || $_SESSION['admin'] !== '1') {
+                header("Location: index.php?page=home");
+                exit;
+            }
 
-                require __DIR__ . '/app/controller/ControllerAdmin.php';
+            require __DIR__ . '/app/controller/ControllerAdmin.php';
 
-                echo '<main class="mainObj">';
-                require __DIR__ . '/app/view/admin.php';
-                echo '</main>';
-                break;
+            echo '<main class="mainObj">';
+            require __DIR__ . '/app/view/admin.php';
+            echo '</main>';
+            break;
+
+        case '403':
+            http_response_code(403);
+            require __DIR__ . '/app/view/errors/403.php';
+            break;
     }
 
 
@@ -173,4 +182,5 @@ $page = $_GET['page'] ?? 'home';
         <h3 className="titleProj">Projecte Backend</h3>
     </footer>
 </body>
+
 </html>
