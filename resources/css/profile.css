@@ -114,3 +114,21 @@
 .hint {
     color: rgb(127, 127, 127);
 }
+
+.profileForm input[type="text"],
+.profileForm input[type="password"] {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.profileForm input[type="text"]:focus,
+.profileForm input[type="password"]:focus {
+  outline: none;
+  background-color: rgb(232, 231, 231);
+}

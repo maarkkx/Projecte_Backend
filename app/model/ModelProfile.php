@@ -20,3 +20,22 @@ function profile_update_username(string $oldUser, string $newUser): bool {
 
     return $stmt->rowCount() > 0;
 }
+
+//get contraseña hasheada
+function getPasswd(string $user): ?string {
+  global $conn;
+  $stmt = $conn->prepare("SELECT password FROM users WHERE user = :u LIMIT 1");
+  $stmt->execute([':u' => $user]);
+  $hash = $stmt->fetchColumn();
+  return $hash ? (string)$hash : null;
+}
+
+/**
+ * Actualiza el hash de password del usuario
+ */
+function updPasswd(string $user, string $newHash): bool {
+  global $conn;
+  $stmt = $conn->prepare("UPDATE users SET password = :p WHERE user = :u");
+  $stmt->execute([':p' => $newHash, ':u' => $user]);
+  return $stmt->rowCount() > 0;
+}
