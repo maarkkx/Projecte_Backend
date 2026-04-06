@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../../config/db-connection.php';
 /**
  * @param user nombre usuario
  * @param nombre nombre
@@ -7,8 +6,7 @@ require_once __DIR__ . '/../../config/db-connection.php';
  * @param correo correo de la cuenta
  * @param password contraseña
  */
-function crearUsuari($user, $nombre, $apellido, $correo, $password) {
-    global $conn;
+function crearUsuari($user, $nombre, $apellido, $correo, $password, $conn) {
     try {
         $sql = "INSERT INTO users (user, nombre, apellido, correo, password) 
                 VALUES (:user, :nombre, :apellido, :correo, :password)";
@@ -31,8 +29,7 @@ function crearUsuari($user, $nombre, $apellido, $correo, $password) {
  * @param user nombre usuario
  * @param password contraseña del usuario
  */
-function loginUsuari($user, $password) {
-    global $conn;
+function loginUsuari($user, $password, $conn) {
     try {
         $sql = "SELECT * FROM `users` 
                 WHERE user = :user AND password = :password 

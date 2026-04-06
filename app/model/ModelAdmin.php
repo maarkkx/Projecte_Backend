@@ -1,13 +1,9 @@
 <?php
-require_once __DIR__ . '/../../config/db-connection.php';
-
 /**
  * Devuelve una array co ntodos los admins
  * @return array
  */
-function getAllUsersAdmin(): array {
-    global $conn;
-
+function getAllUsersAdmin($conn): array {
     $sql = "SELECT user, nombre, apellido, correo, admin
             FROM users
             ORDER BY admin DESC, user ASC";
@@ -20,9 +16,7 @@ function getAllUsersAdmin(): array {
 /**
  * Borra solo usuarios que NO son admin (admin='0')
  */
-function deleteUserAdmin(string $userToDelete): bool {
-    global $conn;
-
+function deleteUserAdmin(string $userToDelete, $conn): bool {
     $sql = "DELETE FROM users
             WHERE user = :u
               AND admin = '0'";

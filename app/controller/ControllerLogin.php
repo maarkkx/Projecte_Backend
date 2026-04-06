@@ -2,6 +2,8 @@
 require_once __DIR__ . "/../model/ModelLogin.php";
 require_once __DIR__ . '/../model/ModelRecaptcha.php';
 require_once __DIR__ . '/../../config/recaptcha.php';
+require_once __DIR__ . '/../model/ModelRemember.php';
+require_once __DIR__ . '/../../config/db-connection.php';
 
 $message = "";
 $messageErr = "";
@@ -30,7 +32,7 @@ if (isset($_POST['signin'])) {
         $messageErr = "Fields missing";
     } else {
         $password = hash('sha256', $pwdPlain);
-        $message  = crearUsuari($user, $name, $surname, $email, $password);
+        $message  = crearUsuari($user, $name, $surname, $email, $password, $conn);
         if ($message =="Error, try again") {
             $messageErr = $message;
             $message = "";
@@ -63,14 +65,11 @@ try {
         $user     = htmlspecialchars($_POST['user'] ?? '');
         $pwdPlain = htmlspecialchars($_POST['pwd']  ?? '');
 
-        if ($_SESSION['login_fails'] > 3 || !$verificar) {
-            throw new Exception("Error login");
-        }
 
         if ($user !== '' && $pwdPlain !== '') {
             $password = hash('sha256', $pwdPlain);
 
-            $row = loginUsuari($user, $password);
+            $row = loginUsuari($user, $password, $conn);
 
             if ($row) {
                 $_SESSION['login_fails'] = 0;
@@ -78,12 +77,10 @@ try {
                 $_SESSION['user']  = $row['user'];
                 $_SESSION['admin'] = $row['admin'];
 
-                require_once __DIR__ . '/../model/ModelRemember.php';
-
                 if (!empty($_POST['remember'])) {
-                    remember_create_token($row['user'], 30);
+                    remember_create_token($row['user'], 30, $conn);
                 } else {
-                    remember_forget_current_token();
+                    remember_forget_current_token($conn);
                 }
 
                 header("Location: index.php");
@@ -99,4 +96,11 @@ try {
     }
 } catch (Exception $e) {
     if (empty($messageErr)) $messageErr = "Error login";
+}
+
+/**
+ * encriptar url
+ */
+function base64url_encode(string $bin): string {
+    return rtrim(strtr(base64_encode($bin), '+/', '-_'), '=');
 }

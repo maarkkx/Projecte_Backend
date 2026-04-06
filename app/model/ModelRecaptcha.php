@@ -1,6 +1,4 @@
 <?php
-require_once __DIR__ . '/../../config/recaptcha.php';
-
 function verificarRecaptcha(string $postRecaptcha, string $secretKey): bool {
     $url = 'https://www.google.com/recaptcha/api/siteverify?secret='
           . $secretKey . '&response=' . $postRecaptcha;

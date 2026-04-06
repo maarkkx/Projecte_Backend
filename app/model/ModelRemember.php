@@ -1,46 +1,20 @@
 <?php
-require_once __DIR__ . '/../../config/db-connection.php';
-
-/*
-*   URL safe
-*/
-function base64url_encode(string $bin): string {
-    return rtrim(strtr(base64_encode($bin), '+/', '-_'), '=');
-}
-
-/**
- * Cookie seguro (HttpOnly, SameSite)
- */
 function remember_set_cookie(string $value, int $expiresTs): void {
     $secure = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
 
     setcookie('rememberme', $value, [
         'expires'  => $expiresTs,
         'path'     => '/',
-        'secure'   => $secure,     // en https: true
-        'httponly' => true,        // JS no lo puede leer
-        'samesite' => 'Lax'
-    ]);
-}
-
-/**
- * Borrar cookie rememberme
- */
-function remember_clear_cookie(): void {
-    setcookie('rememberme', '', [
-        'expires'  => time() - 3600,
-        'path'     => '/',
+        'secure'   => $secure,
         'httponly' => true,
-        'samesite' => 'Lax'
+        'samesite' => 'Lax' //para bloquear la cookie
     ]);
 }
 
 /**
  * Crea token y lo guarda en BD + cookie
  */
-function remember_create_token(string $user, int $days = 30): void {
-    global $conn;
-
+function remember_create_token(string $user, int $days = 30, $conn): void {
     $del = $conn->prepare("DELETE FROM remember_tokens WHERE user = :u");
     $del->execute([':u' => $user]);
 
@@ -68,8 +42,7 @@ function remember_create_token(string $user, int $days = 30): void {
 /**
  * Elimina token de BDD
  */
-function remember_forget_current_token(): void {
-    global $conn;
+function remember_forget_current_token($conn): void {
 
     if (empty($_COOKIE['rememberme'])) {
         remember_clear_cookie();
@@ -97,9 +70,7 @@ function remember_forget_current_token(): void {
  * - si ok: setea $_SESSION['user'] y $_SESSION['admin']
  * - rota token (seguridad)
  */
-function remember_auto_login_if_needed(): void {
-    global $conn;
-
+function remember_auto_login_if_needed($conn): void {
     if (isset($_SESSION['user'])) return;
     if (empty($_COOKIE['rememberme'])) return;
 
@@ -180,5 +151,17 @@ function remember_auto_login_if_needed(): void {
     ]);
 
     remember_set_cookie($selector . ':' . $newValidator, $newExpiresTs);
+}
+
+/**
+ * Borrar cookie rememberme
+ */
+function remember_clear_cookie(): void {
+    setcookie('rememberme', '', [
+        'expires'  => time() - 3600,
+        'path'     => '/',
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ]);
 }
 ?>

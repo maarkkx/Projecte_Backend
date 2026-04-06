@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/../../config/db-connection.php';
 require_once __DIR__ . '/../model/ModelProfile.php';
 
 $message = '';
@@ -49,10 +49,10 @@ if (isset($_POST['update_profile'])) {
             $messageErr = "El nombre de usuario no puede ser el mismo que el actual.";
         } elseif (!preg_match('/^[a-zA-Z0-9_]{3,20}$/', $newUser)) { //Comprobar que el usuario cimple con la regex
             $messageErr = "Usuario inválido. Usa 3-20 caracteres: letras, números o _";
-        } elseif (profile_user_exists($newUser)) {
+        } elseif (profile_user_exists($newUser, $conn)) {
             $messageErr = "Ese usuario ya existe. Elige otro.";
         } else {
-            if (profile_update_username($currentUser, $newUser)) {
+            if (profile_update_username($currentUser, $newUser, $conn)) {
                 $_SESSION['user'] = $newUser; //cambia el user en la sesion al nuevo
                 $currentUser = $newUser;
 
@@ -95,7 +95,7 @@ if (isset($_POST['change_password'])) {
             $passMessageErr = "Contraseña inválida: mínimo 8 caracteres, 1 número y 1 mayúscula.";
         } else {
 
-            $storedHash = getPasswd($currentUser);
+            $storedHash = getPasswd($currentUser, $conn);
             if ($storedHash === null) {
                 $passMessageErr = "No se encontró el usuario.";
             } else {
@@ -114,7 +114,7 @@ if (isset($_POST['change_password'])) {
                         $passMessageErr = "La nueva contraseña no puede ser igual que la actual.";
                     } else {
 
-                        if (updPasswd($currentUser, $newHash)) {
+                        if (updPasswd($currentUser, $newHash, $conn)) {
 
                             session_regenerate_id(true);
                             $_SESSION['csrf_token'] = bin2hex(random_bytes(16));

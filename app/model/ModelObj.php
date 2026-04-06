@@ -1,12 +1,10 @@
 <?php
-require_once __DIR__ . '/../../config/db-connection.php';
 /**
  * Funcion para coger objetos
  * @param limit el maximo de objetos
  * @param offset a partir de que objeto empieza a cogerlos 
  */
-function selectArticles($limit = null, $offset = null, $sortBy = 'id', $dir = 'ASC') {
-    global $conn;
+function selectArticles($limit = null, $offset = null, $sortBy = 'id', $dir = 'ASC', $conn) {
 
     try {
         $allowedSort = ['id', 'titol', 'created_at'];
@@ -45,9 +43,7 @@ function selectArticles($limit = null, $offset = null, $sortBy = 'id', $dir = 'A
  * @param limit el maximo de objetos
  * @param offset a partir de que objeto empieza a cogerlos 
  */
-function selectArticlesByUser($user, $limit = null, $offset = null, $sortBy = 'id', $dir = 'ASC') {
-    global $conn;
-
+function selectArticlesByUser($user, $limit = null, $offset = null, $sortBy = 'id', $dir = 'ASC', $conn) {
     try {
         // Whitelist para evitar inyección en ORDER BY
         $allowedSort = ['id', 'titol', 'created_at'];
@@ -85,8 +81,7 @@ function selectArticlesByUser($user, $limit = null, $offset = null, $sortBy = 'i
 /**
  * Contar todos los objetos
  */
-function countArticles() {
-    global $conn;
+function countArticles($conn) {
     try {
         $sql = "SELECT COUNT(id) AS total FROM articles";
         $stmt = $conn->prepare($sql);
@@ -105,8 +100,7 @@ function countArticles() {
  * Contar todos los objetos de un usuario
  * @param user usuario del que contaremos los objetos
  */
-function countArticlesByUser($user) {
-    global $conn;
+function countArticlesByUser($user, $conn) {
 
     try {
         $sql = "SELECT COUNT(id) AS total 
@@ -132,8 +126,7 @@ function countArticlesByUser($user) {
  * @param titol titulo del objeto
  * @param cos descripcion del objeto
  */
-function createArticle($user, $titol, $cos) {
-    global $conn;
+function createArticle($user, $titol, $cos, $conn) {
     try {
         $sql = "INSERT INTO articles (user, titol, cos) VALUES (:user, :titol, :cos)";
         $stmt = $conn->prepare($sql);
@@ -153,8 +146,7 @@ function createArticle($user, $titol, $cos) {
  * Obtener un objeto
  * @param id id del objeto que queremos
  */
-function getArticleById($id) {
-    global $conn;
+function getArticleById($id, $conn) {
     try {
         $sql = "SELECT id, `user`, titol, cos, created_at
                 FROM articles
@@ -176,8 +168,7 @@ function getArticleById($id) {
  * @param titol nuevo titulo
  * @param cos nueva descripcion 
  */
-function updateArticle($id, $titol, $cos) {
-    global $conn;
+function updateArticle($id, $titol, $cos, $conn) {
     try {
         $sql = "UPDATE articles
                 SET titol = :titol, cos = :cos
@@ -199,8 +190,7 @@ function updateArticle($id, $titol, $cos) {
  * eliminar objetos
  * @param id id del objeto que queremos eliminar
  */
-function deleteArticle($id) {
-    global $conn;
+function deleteArticle($id, $conn) {
     try {
         $sql = "DELETE FROM articles WHERE id = :id";
         $stmt = $conn->prepare($sql);
@@ -213,8 +203,7 @@ function deleteArticle($id) {
     }
 }
 
-function selectRandomArticles($limit = 4) {
-    global $conn;
+function selectRandomArticles($limit = 4, $conn) {
 
     try {
         $sql = "SELECT id, titol, cos 

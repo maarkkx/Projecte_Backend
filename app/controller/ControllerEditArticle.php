@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../model/ModelObj.php';
+require_once __DIR__ . '/../../config/db-connection.php';
 
 // comprobar id
 if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
@@ -10,7 +11,7 @@ if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
 $id = (int)$_GET['id'];
 
 // cargar artículo
-$article = getArticleById($id);
+$article = getArticleById($id,$conn);
 if (!$article) {
     $error = "Object not found.";
     return;
@@ -29,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // borrar
     if (isset($_POST['delete'])) {
-        if (deleteArticle($id)) {
+        if (deleteArticle($id, $conn)) {
             header("Location: index.php?page=objectes");
             exit;
         } else {
@@ -42,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $titol = $_POST['titol'] ?? '';
         $cos   = $_POST['cos'] ?? '';
 
-        if (updateArticle($id, $titol, $cos)) {
+        if (updateArticle($id, $titol, $cos, $conn)) {
             header("Location: index.php?page=objectes");
             exit;
         } else {

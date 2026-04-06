@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/config/db-connection.php';
 session_start();
 
 // timeout (no rememeber)
@@ -20,7 +21,7 @@ if (isset($_SESSION['user'])) {
 }
 
 require_once __DIR__ . '/app/model/ModelRemember.php';
-remember_auto_login_if_needed();
+remember_auto_login_if_needed($conn);
 $page = $_GET['page'] ?? 'home';
 ?>
 <!DOCTYPE html>
@@ -115,7 +116,7 @@ $page = $_GET['page'] ?? 'home';
 
         case 'logout':
             require_once __DIR__ . '/app/model/ModelRemember.php';
-            remember_forget_current_token();
+            remember_forget_current_token($conn);
 
             session_unset();
             session_destroy();

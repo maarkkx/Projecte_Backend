@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../model/ModelAdmin.php';
+require_once __DIR__ . '/../../config/db-connection.php';
 
 $message = "";
 $messageErr = "";
@@ -23,7 +24,7 @@ if (isset($_POST['delete_user'])) {
         } elseif ($userToDelete === $currentUser) {
             $messageErr = "You can't delete yourself.";
         } else {
-            if (deleteUserAdmin($userToDelete)) {
+            if (deleteUserAdmin($userToDelete, $conn)) {
                 $message = "User deleted successfully.";
             } else {
                 $messageErr = "You can't delete administrators (or user not found).";
@@ -32,4 +33,4 @@ if (isset($_POST['delete_user'])) {
     }
 }
 
-$users = getAllUsersAdmin();
+$users = getAllUsersAdmin($conn);
