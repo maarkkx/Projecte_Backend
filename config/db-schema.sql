@@ -40,6 +40,13 @@ CREATE TABLE IF NOT EXISTS remember_tokens (
         ON DELETE CASCADE
 );
 
+CREATE TABLE password_resets (
+    email VARCHAR(255) NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    expires_at DATETIME NOT NULL,
+    PRIMARY KEY (token)
+);
+
 ALTER TABLE articles
   ADD COLUMN created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   ADD INDEX idx_created_at (created_at);

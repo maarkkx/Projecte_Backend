@@ -32,7 +32,7 @@
                 <input type="checkbox" id="remember" name="remember">
                 <label for="remember">Remember me</label>
             </div>
-            <span class="link">Forgot password?</span>
+            <a href="index.php?page=forgot">Forgot your password?</a>
         </div>
         <?php if (($_SESSION['login_fails'] ?? 0) >= 3): ?>
             <div class="g-recaptcha" data-sitekey="<?= RECAPTCHA_SITE_KEY ?>"></div>

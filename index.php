@@ -174,6 +174,16 @@ $page = $_GET['page'] ?? 'home';
             http_response_code(403);
             require __DIR__ . '/app/view/errors/403.php';
             break;
+
+        case 'forgot':
+            require __DIR__ . '/app/controller/ControllerForgot.php';
+            require __DIR__ . '/app/view/forgot.php';
+            break;
+
+        case 'reset_password':
+            require_once __DIR__ . '/app/controller/ControllerReset.php';
+            require __DIR__ . '/app/view/reset_password.php';
+            break;
     }
 
 

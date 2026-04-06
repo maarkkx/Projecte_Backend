@@ -36,3 +36,5 @@ coverage/
 .env.*
 config/recaptcha.php
 config/db-connection.php
+config/mail.php
+libs/PHPMailer
