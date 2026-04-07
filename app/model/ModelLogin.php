@@ -46,4 +46,39 @@ function loginUsuari($user, $password, $conn) {
         return false;
     }
 }
+
+function getUserByOAuth($provider, $uid, $conn) {
+    $stmt = $conn->prepare("
+        SELECT * FROM users 
+        WHERE oauth_provider = ? AND oauth_uid = ?
+    ");
+    $stmt->execute([$provider, $uid]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+function crearUsuariOAuth($user, $email, $provider, $uid, $conn) {
+    $stmt = $conn->prepare("
+        INSERT INTO users (user, correo, oauth_provider, oauth_uid)
+        VALUES (?, ?, ?, ?)
+    ");
+    return $stmt->execute([$user, $email, $provider, $uid]);
+}
+
+//crear un username diferent en cas de que existeixi ja un (oauth)
+function generarUsernameUnico($username, $conn) {
+    $base = $username;
+    $i = 1;
+
+    //comproven si existeix l'user, si existeix afegim un numero fins que ja no existeixi
+    while (true) {
+        $stmt = $conn->prepare("SELECT user FROM users WHERE user = ?");
+        $stmt->execute([$username]);
+
+        if (!$stmt->fetch()) return $username;
+
+        $username = $base . $i;
+        $i++;
+    }
+}
+
 ?>

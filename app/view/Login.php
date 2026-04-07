@@ -68,5 +68,11 @@
             </button>
         </div>
 
+        <div class="flex-row">
+            <a href="index.php?page=oauth_github&action=login" class="btn git">
+                Github
+            </a>
+        </div>
+
     </form>
 </div>

@@ -115,7 +115,13 @@
   border: 1px solid #2d79f3;
   ;
 }
-
+.git {
+  background-color: black;
+  color: white;
+}
+.git:hover {
+  background-color: rgb(52, 52, 52);
+}
     
 .msg{
   padding: 12px 14px;

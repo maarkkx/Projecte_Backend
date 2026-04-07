@@ -184,6 +184,10 @@ $page = $_GET['page'] ?? 'home';
             require_once __DIR__ . '/app/controller/ControllerReset.php';
             require __DIR__ . '/app/view/reset_password.php';
             break;
+
+        case 'oauth_github':
+            require __DIR__ . '/app/controller/ControllerOauth.php';
+            break;
     }
 
 
