@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../model/ModelObj.php';
-
 function getArticlesApi($conn) {
     try {
         $articles = selectArticles(null, null, 'id', 'ASC', $conn);

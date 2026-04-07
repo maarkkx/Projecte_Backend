@@ -31,7 +31,7 @@ function actualizarPasswordUsuario($conn, $email, $hashed_password) {
     ]);
 }
 
-// 4. Borrar el token para que no se pueda volver a usar
+//borrar token
 function borrarTokenReset($conn, $email) {
     $stmt = $conn->prepare("DELETE FROM password_resets WHERE email = :e");
     return $stmt->execute([':e' => $email]);

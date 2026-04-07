@@ -107,3 +107,9 @@ define('GITHUB_REDIRECT_URI', 'http://localhost/practiques/backend/Projecte/inde
 ```
 
 He decidit fer OAuth amb GitHub, ja que és bastant fàcil d'implementar.
+
+#### API
+Accedir a: 
+>Projecte/articles
+
+get de tots els articles
