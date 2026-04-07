@@ -91,3 +91,19 @@ function enviarEmailRecuperacion($emailDestino, $enlace) {
 }
 ?>
 ```
+
+#### Oauth
+Per l'OAuth he creat un arxiu a:
+>config/oauth.php
+
+Amb les variables necessàries perquè funcioni, plantilla:
+
+```php
+<?php
+define('GITHUB_CLIENT_ID', '');
+define('GITHUB_CLIENT_SECRET', '');
+define('GITHUB_REDIRECT_URI', 'http://localhost/practiques/backend/Projecte/index.php?page=oauth_github')
+?>
+```
+
+He decidit fer OAuth amb GitHub, ja que és bastant fàcil d'implementar.

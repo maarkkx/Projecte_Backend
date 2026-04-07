@@ -20,3 +20,6 @@ RewriteRule ^config/ - [F,L]
 
 # app (controladores/modelos/vistas)
 RewriteRule ^app/ - [F,L]
+
+# Endpoint API
+RewriteRule ^articles$ articles.php [L]
