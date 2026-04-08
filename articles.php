@@ -6,32 +6,38 @@ require_once __DIR__ . '/app/model/ModelApikey.php';
 
 header('Content-Type: application/json');
 
-$authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+function obtenerBearerToken(): ?string
+{
+    $authorizationHeader = null;
 
-if (empty($authHeader) && function_exists('getallheaders')) {
-    $headers = getallheaders();
-    $authHeader = $headers['Authorization'] ?? $headers['authorization'] ?? '';
+    if (function_exists('getallheaders')) {
+        $headers = getallheaders();
+        $authorizationHeader = $headers['Authorization'] ?? $headers['authorization'] ?? null;
+    }
+
+    if ($authorizationHeader === null && isset($_SERVER['HTTP_AUTHORIZATION'])) {
+        $authorizationHeader = $_SERVER['HTTP_AUTHORIZATION'];
+    }
+
+    if (!$authorizationHeader || stripos($authorizationHeader, 'Bearer ') !== 0) {
+        return null;
+    }
+
+    $token = trim(substr($authorizationHeader, 7));
+    return $token !== '' ? $token : null;
 }
 
-if (empty($authHeader)) {
+$apiKey = obtenerBearerToken();
+
+if ($apiKey === null) {
     http_response_code(401);
     echo json_encode([
         'success' => false,
-        'message' => 'Authorization header required'
+        'message' => 'Authorization Bearer token required'
     ]);
     exit();
 }
 
-if (!preg_match('/Bearer\s+(.+)/i', $authHeader, $matches)) {
-    http_response_code(401);
-    echo json_encode([
-        'success' => false,
-        'message' => 'Invalid Authorization format'
-    ]);
-    exit();
-}
-
-$apiKey = trim($matches[1]);
 $user = getUserByApiKey($conn, $apiKey);
 
 if (!$user) {

@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../../config/api.php';
 require_once __DIR__ . '/../../config/db-connection.php';
 require_once __DIR__ . '/../model/ModelApikey.php';
 
@@ -25,11 +24,9 @@ if (isset($_POST['generate_api_key'])) {
         if (!empty($existingApiKey['api_key_hash'])) {
             $messageErr = 'You already have an Api Key';
         } else {
-            $apiFirst = FIRST_PART_API_KEY;
-            $apiMid = random_int(0, 100000);
-            $apiLast = $user;
+            
 
-            $apikey = $apiFirst . $apiMid . $apiLast;
+            $apikey = bin2hex(random_bytes(16));
             $hashApiKey = hash('sha256', $apikey);
 
             $check = saveApiKey($hashApiKey, $conn, $user);
