@@ -28,4 +28,16 @@ function getApiKey($conn, $user) {
     ]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+function getUserByApiKey($conn, $apiKey) {
+    $hashApiKey = hash('sha256', $apiKey);
+
+    $sql = "SELECT user FROM users WHERE api_key_hash = :api LIMIT 1";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([
+        ':api' => $hashApiKey
+    ]);
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 ?>

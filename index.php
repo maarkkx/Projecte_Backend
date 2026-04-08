@@ -195,6 +195,7 @@ $page = $_GET['page'] ?? 'home';
                 header("Location: index.php?page=login");
                 exit;
             }
+            require_once __DIR__ . '/app/controller/ControllerApikey.php';
             require __DIR__ . '/app/view/apikey.php';
             break;
     }

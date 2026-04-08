@@ -28,7 +28,7 @@ if (isset($_POST['generate_api_key'])) {
             $apiFirst = FIRST_PART_API_KEY;
             $apiMid = random_int(0, 100000);
             $apiLast = $user;
-            
+
             $apikey = $apiFirst . $apiMid . $apiLast;
             $hashApiKey = hash('sha256', $apikey);
 
@@ -36,7 +36,8 @@ if (isset($_POST['generate_api_key'])) {
 
             if ($check) {
                 $_SESSION['api_key'] = $apikey;
-                $message = 'Api Key created successfully';
+                $message = 'Api Key created successfully. Your Api Key: ' . $apikey;
+
             } else {
                 throw new Exception('Error creating api key');
             }
