@@ -39,3 +39,4 @@ config/db-connection.php
 config/mail.php
 libs/PHPMailer
 config/oauth.php
+config/api.php

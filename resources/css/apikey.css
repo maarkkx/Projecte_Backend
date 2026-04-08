@@ -1,0 +1,88 @@
+.navigation {
+    margin-bottom: 18%;
+}
+
+.mainObj {
+    margin-bottom: 20%;
+    font-family: Quicksand, sans-serif;
+}
+
+.apiKeyPage {
+    width: 100%;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.apiKeyForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    width: 100%;
+}
+
+.generateApiKeyBtn {
+    padding: 16px 28px;
+    border: none;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: rgb(140, 140, 140);
+    color: white;
+}
+
+.generateApiKeyBtn:hover {
+    background-color: rgb(208, 208, 208);
+}
+
+.msg {
+    width: 100%;
+    max-width: 600px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.msg p {
+    margin: 0;
+}
+
+.msg.ok {
+    background: #e8fff0;
+    border: 1px solid #8ce0a8;
+    color: #1a7f37;
+}
+
+.msg.bad {
+    background: #fff1f1;
+    border: 1px solid #f0a1a1;
+    color: #d1242f;
+}
+
+.apiKeyResult {
+    width: 100%;
+    max-width: 650px;
+    margin-top: 10px;
+}
+
+.apiKeyResult input[type="text"] {
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px 12px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 15px;
+    outline: none;
+}
+
+.hint {
+    color: rgb(127, 127, 127);
+    margin-top: 8px;
+}

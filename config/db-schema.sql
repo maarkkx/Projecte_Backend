@@ -59,6 +59,10 @@ ALTER TABLE users MODIFY apellido VARCHAR(50) NULL;
 ALTER TABLE users 
     ADD oauth_provider VARCHAR(50) NULL AFTER correo,
     ADD oauth_uid VARCHAR(100) NULL AFTER oauth_provider,
+
+ALTER TABLE users
+    ADD COLUMN api_key_hash CHAR(64) NULL,
+    ADD COLUMN api_key_created_at DATETIME NULL;
     
 INSERT INTO users (user, nombre, apellido, correo, password, admin)
 VALUES

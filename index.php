@@ -54,6 +54,7 @@ $page = $_GET['page'] ?? 'home';
                 <ul class="navUl">
                     <li><a title="Main Page" class="first" href="index.php">Home</a></li>
                     <li><a title="Objects Page" href="index.php?page=objectes">Objects</a></li>
+                    <li><a title="Api Key" href="index.php?page=apikey">Api</a></li>
                 </ul>
                 <ul class="navUl">
                     <?php if (isset($_SESSION['user'])): ?>
@@ -187,6 +188,14 @@ $page = $_GET['page'] ?? 'home';
 
         case 'oauth_github':
             require __DIR__ . '/app/controller/ControllerOauth.php';
+            break;
+        
+        case 'apikey':
+            if (!isset($_SESSION['user'])) {
+                header("Location: index.php?page=login");
+                exit;
+            }
+            require __DIR__ . '/app/view/apikey.php';
             break;
     }
 

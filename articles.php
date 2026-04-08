@@ -7,4 +7,4 @@ header('Content-Type: application/json');
 $response = getArticlesApi($conn);
 
 echo json_encode($response);
-exit(); 
+exit();
