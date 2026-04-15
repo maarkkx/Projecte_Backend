@@ -23,6 +23,8 @@
         </a>
     </form>
 
+    <input type="text" id="searchInput" placeholder="Buscar objecte..." style="border-radius: 5px; width: 200px; height: 30px;">
+    <script src="resources/js/objectes.js"></script>
     <h3>Llista d'articles:</h3>
 
     <?php if (!empty($articles)): ?>
