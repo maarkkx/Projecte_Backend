@@ -49,6 +49,6 @@ if (!$user) {
     exit();
 }
 
-$response = getArticlesApi($conn);
+$response = articles($conn);
 echo json_encode($response);
 exit();

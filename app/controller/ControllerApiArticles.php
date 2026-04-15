@@ -1,17 +1,8 @@
 <?php
 require_once __DIR__ . '/../model/ModelObj.php';
-function getArticlesApi($conn) {
-    try {
-        $articles = selectArticles(null, null, 'id', 'ASC', $conn);
+require_once __DIR__ . '/../model/ModelApiArticles.php';
 
-        return [
-            'success' => true,
-            'data' => $articles
-        ];
-    } catch (Exception $e) {
-        return [
-            'success' => false,
-            'message' => $e->getMessage()
-        ];
-    }
+function articles($conn) {
+    $articles = selectArticles(null, null, 'id', 'ASC', $conn);
+    return getArticlesApi($articles);
 }

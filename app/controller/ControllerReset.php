@@ -12,7 +12,7 @@ $emailUsuario = "";
 if (isset($_GET['token']) && !empty($_GET['token'])) {
     $token = $_GET['token'];
     
-    $resultado = validarTokenReset($conn, $token);
+    $resultado = validarTokenReset($conn, hash('sha256', $token));
 
     if ($resultado) {
         $tokenValido = true;
