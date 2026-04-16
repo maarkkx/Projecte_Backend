@@ -115,3 +115,6 @@ Accedir a:
 get de tots els articles
 
 Per accedir a la api has de generar una api key. Per poder generarla has de fer log in, aquesta key es guarda a la BD i quan l'usuari inicia sessió la key es guarda al sessión. Quan entras a la api es comprova la api key.
+
+####  AJAX
+He afegit un buscador amb ajax a l'apartat d'objectes.
